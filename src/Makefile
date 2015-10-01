@@ -36,3 +36,4 @@ WSDL:
 
 clean:
 	$(RM) -r $(JWS_SRC) $(BIN_PATH)/* $(APP_PATH)/WEB-INF/MyLTCState.class
+	$(RM) $(shell find -name *.class)
