@@ -46,8 +46,12 @@ public class MyUserClient {
           System.out.printf("%s: %s\n%s: %s\n", from.toUpperCase(), time, to.toUpperCase(), toTime);
           break;
         default:
+          System.err.printf("Invalid command '%s'\n", command);
           break;
       }
+    }
+    catch (ArrayIndexOutOfBoundsException e) {
+      System.err.println("Error: Invalid number of arguments");
     }
     catch (Exception e) {
       System.err.println("Error: Invalid arguments");

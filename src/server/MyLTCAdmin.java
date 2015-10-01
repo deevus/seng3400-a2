@@ -17,9 +17,12 @@ public class MyLTCAdmin {
   public boolean setOffset(String user, String pwd, String location, double offset) {
     MyLTCState.incrementCallCount();
 
-    if (!MyLTCState.validate(user, pwd)) return false;
+    if (!MyLTCState.validate(user, pwd) | !MyLTCState.hasLocation(location)) {
+      return false;
+    }
 
-    return true;
+    MyLTCState.removeLocation(location);
+    return MyLTCState.addLocation(location, offset);
   }
 
   /**

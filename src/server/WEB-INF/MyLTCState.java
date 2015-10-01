@@ -38,6 +38,10 @@ public class MyLTCState {
     return true;
   }
 
+  public static void removeLocation(String location) {
+    locations.remove(location.toLowerCase());
+  }
+
   public static String[] getLocations() {
     String[] keys = new String[locations.size()];
     int index = 0;
@@ -47,5 +51,9 @@ public class MyLTCState {
     }
 
     return keys;
+  }
+
+  public static boolean hasLocation(String location) {
+    return locations.containsKey(location.toLowerCase());
   }
 }
