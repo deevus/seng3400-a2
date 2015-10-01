@@ -1,14 +1,25 @@
+/*
+ * Simon Hartcher
+ * C3185790
+ * SENG3400
+ */
+
 import localhost.axis.MyLTCServer_jws.*;
 
 public class MyUserClient {
   private static MyLTCServerService service;
   private static MyLTCServer server;
 
+  /**
+   * MyUserClient entry point
+   */
   public static void main(String[] args) {
     try {
+      //load service
       service = new MyLTCServerServiceLocator();
       server = service.getMyLTCServer();
 
+      //if we don't have any arguments
       if (args.length < 1) {
         printUsage();
         System.exit(0);
@@ -19,6 +30,7 @@ public class MyUserClient {
       System.exit(0);
     }
     catch (Exception e) {
+      //some uncaught error
       e.printStackTrace();
       System.exit(1);
     }
@@ -26,8 +38,10 @@ public class MyUserClient {
 
   private static void processCommand(String[] arguments) {
     try {
+      //get command
       String command = arguments[0];
 
+      //process given command
       switch (command.toLowerCase()) {
         case "listlocations":
           System.out.print(server.listLocations());
@@ -51,9 +65,11 @@ public class MyUserClient {
       }
     }
     catch (ArrayIndexOutOfBoundsException e) {
+      //if too many arguments are supplied
       System.err.println("Error: Invalid number of arguments");
     }
     catch (Exception e) {
+      //general error
       System.err.println("Error: Invalid arguments");
       e.printStackTrace();
     }

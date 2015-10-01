@@ -1,3 +1,9 @@
+/*
+ * Simon Hartcher
+ * C3185790
+ * SENG3400
+ */
+
 import localhost.axis.MyLTCAdmin_jws.*;
 
 public class MyUserAdmin {
@@ -6,9 +12,11 @@ public class MyUserAdmin {
 
   public static void main(String[] args) {
     try {
+      //init service
       service = new MyLTCAdminServiceLocator();
       server = service.getMyLTCAdmin();
 
+      //if no arguments are supplied
       if (args.length < 1) {
         printUsage();
         System.exit(0);
@@ -19,6 +27,7 @@ public class MyUserAdmin {
       System.exit(0);
     }
     catch (Exception e) {
+      //catch uncaught error here
       e.printStackTrace();
       System.exit(1);
     }
@@ -26,11 +35,14 @@ public class MyUserAdmin {
 
   private static void processCommand(String[] arguments) {
     try {
+      //load required arguments into vars
       String user = arguments[0];
       String password = arguments[1];
       String command = arguments[2];
+
       String location; double offset; boolean result;
 
+      //process given command
       switch (command.toLowerCase()) {
         case "addlocation":
           location = arguments[3];
@@ -54,9 +66,11 @@ public class MyUserAdmin {
       }
     }
     catch (ArrayIndexOutOfBoundsException e) {
+      //invalid number of arguments
       System.err.println("Error: Invalid number of arguments");
     }
     catch (Exception e) {
+      //general error
       System.err.println("Error: Invalid arguments");
       e.printStackTrace();
     }

@@ -1,3 +1,9 @@
+/*
+ * Simon Hartcher
+ * C3185790
+ * SENG3400
+ */
+
 public class MyLTCAdmin {
   /**
    * Add a new location to the system with its current time offset relative to GMT
@@ -17,10 +23,12 @@ public class MyLTCAdmin {
   public boolean setOffset(String user, String pwd, String location, double offset) {
     MyLTCState.incrementCallCount();
 
+    //invalid user or location doesn't exist
     if (!MyLTCState.validate(user, pwd) | !MyLTCState.hasLocation(location)) {
       return false;
     }
 
+    //remove it, then add it with new offset
     MyLTCState.removeLocation(location);
     return MyLTCState.addLocation(location, offset);
   }
