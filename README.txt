@@ -13,6 +13,7 @@ Server files are in the 'server' folder:
   i.e. javac -classpath "..." -d "/path/to/WEB-INF/classes" MyLTCState.java
 
 Client files are in the 'client' folder:
-1. Build MyUserAdmin.java and MyUserClient.java with the axis libs in the classpath
-2. Run them without arguments to see usage instructions
+1. Build the WSDL files using WSDL2Java
+2. Build the client files (including WSDL) with the axis libs in the classpath
+3. Run the clients without arguments to see their usage instructions
   i.e. java MyUserAdmin
