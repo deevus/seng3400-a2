@@ -4,6 +4,7 @@ CLASSPATH := $(AXIS_PATH)\lib\*
 BIN_PATH := ../bin
 
 SERVER_SRC := $(wildcard server/*.java)
+SERVER_WEBINF := $(wildcard server/WEB-INF/*.java)
 JWS_SRC := $(patsubst server/%.java,$(APP_PATH)\\%.jws,$(SERVER_SRC))
 WSDL_SRC := $(wildcard *.jws.xml)
 
@@ -12,7 +13,7 @@ CLIENT_OBJ := $(patsubst client/%.java,$(BIN_PATH)/%.class,$(CLIENT_SRC))
 
 all: build
 
-build: clean build-server WSDL build-client
+build: build-server WSDL build-client
 
 build-client:
 	@cp log4j.properties $(BIN_PATH)
@@ -20,8 +21,10 @@ build-client:
 	javac -classpath "$(CLASSPATH)" -d $(BIN_PATH) $(CLIENT_SRC)
 
 copy_to_server = $(shell cp $(file) $(patsubst server/%.java,$(APP_PATH)/%.jws,$(file)))
+build_on_server = $(shell javac -classpath "$(CLASSPATH)" -d "$(APP_PATH)/WEB-INF/classes" $(file))
 build-server:
 	$(foreach file, $(SERVER_SRC), $(copy_to_server))
+	$(foreach file, $(SERVER_WEBINF), $(build_on_server))
 
 export_classpath = export CLASSPATH="$(CLASSPATH)"
 compile_wsdl = $(shell $(export_classpath) && java org.apache.axis.wsdl.WSDL2Java $(file))
@@ -32,4 +35,4 @@ WSDL:
 	@mv localhost client
 
 clean:
-	$(RM) -r $(JWS_SRC) $(BIN_PATH)/*
+	$(RM) -r $(JWS_SRC) $(BIN_PATH)/* $(APP_PATH)/WEB-INF/MyLTCState.class

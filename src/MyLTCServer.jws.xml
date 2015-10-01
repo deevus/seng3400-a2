@@ -3,23 +3,67 @@
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
 
-   <wsdl:message name="sayHelloResponse">
-
-      <wsdl:part name="sayHelloReturn" type="xsd:string"/>
+   <wsdl:message name="listLocationsRequest">
 
    </wsdl:message>
 
-   <wsdl:message name="sayHelloRequest">
+   <wsdl:message name="convertResponse">
+
+      <wsdl:part name="convertReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="currentOffsetResponse">
+
+      <wsdl:part name="currentOffsetReturn" type="xsd:double"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="convertRequest">
+
+      <wsdl:part name="from" type="xsd:string"/>
+
+      <wsdl:part name="to" type="xsd:string"/>
+
+      <wsdl:part name="time" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listLocationsResponse">
+
+      <wsdl:part name="listLocationsReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="currentOffsetRequest">
+
+      <wsdl:part name="location" type="xsd:string"/>
 
    </wsdl:message>
 
    <wsdl:portType name="MyLTCServer">
 
-      <wsdl:operation name="sayHello">
+      <wsdl:operation name="convert" parameterOrder="from to time">
 
-         <wsdl:input message="impl:sayHelloRequest" name="sayHelloRequest"/>
+         <wsdl:input message="impl:convertRequest" name="convertRequest"/>
 
-         <wsdl:output message="impl:sayHelloResponse" name="sayHelloResponse"/>
+         <wsdl:output message="impl:convertResponse" name="convertResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="currentOffset" parameterOrder="location">
+
+         <wsdl:input message="impl:currentOffsetRequest" name="currentOffsetRequest"/>
+
+         <wsdl:output message="impl:currentOffsetResponse" name="currentOffsetResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listLocations">
+
+         <wsdl:input message="impl:listLocationsRequest" name="listLocationsRequest"/>
+
+         <wsdl:output message="impl:listLocationsResponse" name="listLocationsResponse"/>
 
       </wsdl:operation>
 
@@ -29,17 +73,53 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="sayHello">
+      <wsdl:operation name="convert">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="sayHelloRequest">
+         <wsdl:input name="convertRequest">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://DefaultNamespace" use="encoded"/>
 
          </wsdl:input>
 
-         <wsdl:output name="sayHelloResponse">
+         <wsdl:output name="convertResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost:8080/axis/MyLTCServer.jws" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="currentOffset">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="currentOffsetRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://DefaultNamespace" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="currentOffsetResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost:8080/axis/MyLTCServer.jws" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listLocations">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listLocationsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://DefaultNamespace" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listLocationsResponse">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost:8080/axis/MyLTCServer.jws" use="encoded"/>
 

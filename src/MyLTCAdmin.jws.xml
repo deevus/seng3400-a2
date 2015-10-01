@@ -3,23 +3,79 @@
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
 
-   <wsdl:message name="sayHelloResponse">
+   <wsdl:message name="callCountRequest">
 
-      <wsdl:part name="sayHelloReturn" type="xsd:string"/>
+      <wsdl:part name="user" type="xsd:string"/>
+
+      <wsdl:part name="pwd" type="xsd:string"/>
 
    </wsdl:message>
 
-   <wsdl:message name="sayHelloRequest">
+   <wsdl:message name="setOffsetRequest">
+
+      <wsdl:part name="user" type="xsd:string"/>
+
+      <wsdl:part name="pwd" type="xsd:string"/>
+
+      <wsdl:part name="location" type="xsd:string"/>
+
+      <wsdl:part name="offset" type="xsd:double"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addLocationResponse">
+
+      <wsdl:part name="addLocationReturn" type="xsd:boolean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addLocationRequest">
+
+      <wsdl:part name="user" type="xsd:string"/>
+
+      <wsdl:part name="pwd" type="xsd:string"/>
+
+      <wsdl:part name="location" type="xsd:string"/>
+
+      <wsdl:part name="offset" type="xsd:double"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="callCountResponse">
+
+      <wsdl:part name="callCountReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setOffsetResponse">
+
+      <wsdl:part name="setOffsetReturn" type="xsd:boolean"/>
 
    </wsdl:message>
 
    <wsdl:portType name="MyLTCAdmin">
 
-      <wsdl:operation name="sayHello">
+      <wsdl:operation name="setOffset" parameterOrder="user pwd location offset">
 
-         <wsdl:input message="impl:sayHelloRequest" name="sayHelloRequest"/>
+         <wsdl:input message="impl:setOffsetRequest" name="setOffsetRequest"/>
 
-         <wsdl:output message="impl:sayHelloResponse" name="sayHelloResponse"/>
+         <wsdl:output message="impl:setOffsetResponse" name="setOffsetResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="callCount" parameterOrder="user pwd">
+
+         <wsdl:input message="impl:callCountRequest" name="callCountRequest"/>
+
+         <wsdl:output message="impl:callCountResponse" name="callCountResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addLocation" parameterOrder="user pwd location offset">
+
+         <wsdl:input message="impl:addLocationRequest" name="addLocationRequest"/>
+
+         <wsdl:output message="impl:addLocationResponse" name="addLocationResponse"/>
 
       </wsdl:operation>
 
@@ -29,17 +85,53 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="sayHello">
+      <wsdl:operation name="setOffset">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="sayHelloRequest">
+         <wsdl:input name="setOffsetRequest">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://DefaultNamespace" use="encoded"/>
 
          </wsdl:input>
 
-         <wsdl:output name="sayHelloResponse">
+         <wsdl:output name="setOffsetResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost:8080/axis/MyLTCAdmin.jws" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="callCount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="callCountRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://DefaultNamespace" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="callCountResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost:8080/axis/MyLTCAdmin.jws" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addLocation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addLocationRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://DefaultNamespace" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addLocationResponse">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost:8080/axis/MyLTCAdmin.jws" use="encoded"/>
 
